@@ -1,0 +1,7 @@
+export const ENV = {
+  TIMBU_BASE_URL: process.env.EXPO_PUBLIC_TIMBU_BASE_URL ?? "https://api.timbu.cloud",
+  TIMBU_API_KEY: process.env.EXPO_PUBLIC_TIMBU_API_KEY ?? "790072ec67aa427bb83d6f5c394709a820240704232220413911",
+  TIMBU_APP_ID: process.env.EXPO_PUBLIC_TIMBU_APP_ID ?? "CTEM9UKLQKN75B9",
+  TIMBU_ORG_ID: process.env.EXPO_PUBLIC_TIMBU_ORG_ID ?? "e38d01c3fd494481839adbba6cd6437d",
+  TIMBU_PROXY_BASE_URL: process.env.EXPO_PUBLIC_TIMBU_PROXY_BASE_URL ?? "https://api.timbu.cloud",
+};
