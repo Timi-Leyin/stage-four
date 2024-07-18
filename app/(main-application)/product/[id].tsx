@@ -23,9 +23,12 @@ import { useCart } from "@/context/cart-context";
 import { ProductPlaceholder } from "@/components/loading-placeholders/product-placeholder";
 import ProductRating from "@/components/product/product-rating";
 import { primaryColor } from "@/constants/colors";
+import { useWishlist } from "@/context/wishlist-context";
 
 const ProductDetailScreen = () => {
   const { id: productId } = useGlobalSearchParams();
+  const { getProductFromWishlist, removeFromWishlist, addToWishlist } =
+    useWishlist();
   const { cart, addToCart, removeFromCart, getProductFromCart } = useCart();
   const { data, error, fetchData, loading } = useFetch(GET_PRODUCT);
   const category = data ? data.categories.map((c: any) => c.name) : [];
@@ -63,11 +66,19 @@ const ProductDetailScreen = () => {
               <ThemedText type="title" style={styles.productName}>
                 {data.name}
               </ThemedText>
-              {category.map((c:string, index:number)=> <ThemedText style={{textTransform:"uppercase", fontSize:14}} type="default" key={index}>{c}, {" "} </ThemedText>)}
+              {category.map((c: string, index: number) => (
+                <ThemedText
+                  style={{ textTransform: "uppercase", fontSize: 14 }}
+                  type="default"
+                  key={index}
+                >
+                  {c},{" "}
+                </ThemedText>
+              ))}
               {data.available_quantity && (
                 <ThemedText
-                type="title"
-                style={[styles.styledText, styles.price]}
+                  type="title"
+                  style={[styles.styledText, styles.price]}
                 >
                   NGN {formatMoney(data.available_quantity)}
                 </ThemedText>
@@ -99,13 +110,30 @@ const ProductDetailScreen = () => {
                   )}
                 </View>
                 <TouchableOpacity
+                  onPress={() => {
+                    const iswishlist = getProductFromWishlist(
+                      productId as string
+                    );
+                    if (iswishlist) {
+                      return removeFromWishlist(productId as string);
+                    }
+                    addToWishlist(data);
+                  }}
                   style={{
                     backgroundColor: primaryColor,
                     padding: 20,
                     borderRadius: 30,
                   }}
                 >
-                  <Bookmark size={15} color="#fff" />
+                  <Bookmark
+                    size={15}
+                    variant={
+                      getProductFromWishlist(productId as string)
+                        ? "Bold"
+                        : "Linear"
+                    }
+                    color="#fff"
+                  />
                 </TouchableOpacity>
               </View>
             </View>
@@ -143,7 +171,7 @@ const styles = StyleSheet.create({
   },
   productName: {
     fontFamily: FONTS.Arvo.Regular,
-    marginTop:10,
+    marginTop: 10,
   },
   price: {
     fontSize: 20,

@@ -4,12 +4,15 @@ import { Slot } from "expo-router";
 import { ProductsProvider } from "@/context/products-context";
 import BottomBar from "@/components/navigation/bottom-bar";
 import { CartProvider } from "@/context/cart-context";
+import { WishlistProvider } from "@/context/wishlist-context";
 
 const AppLayout = () => {
   return (
     <ProductsProvider>
       <CartProvider>
-        <Slot />
+        <WishlistProvider>
+          <Slot />
+        </WishlistProvider>
         <BottomBar />
       </CartProvider>
     </ProductsProvider>

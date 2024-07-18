@@ -28,6 +28,7 @@ import formatMoney from "@/utils/format-money";
 import { useCart } from "@/context/cart-context";
 import { useRouter } from "expo-router";
 import ProductRating from "./product-rating";
+import { useWishlist } from "@/context/wishlist-context";
 
 const ProductCard = ({
   product,
@@ -37,6 +38,8 @@ const ProductCard = ({
   width?: DimensionValue;
 }) => {
   const { cart, addToCart, removeFromCart, getProductFromCart } = useCart();
+  const { addToWishlist, getProductFromWishlist, removeFromWishlist } =
+    useWishlist();
   const router = useRouter();
   const productInCart = getProductFromCart(product.id);
   const addToCartHandler = () => {
@@ -66,7 +69,6 @@ const ProductCard = ({
 
   const actualPrice = product.available_quantity;
 
-  // console.log(productInCart)
   return (
     <View
       style={{
@@ -84,11 +86,19 @@ const ProductCard = ({
       >
         <TouchableOpacity
           onPress={() => {
-            // router.navigate(`/product/${product.id}`);
+            const iswishlist = getProductFromWishlist(product.id);
+            if (iswishlist) {
+              return removeFromWishlist(product.id);
+            }
+            addToWishlist(product);
           }}
           style={styles.addToWishlist}
         >
-          <Bookmark size={15} color="#fff" />
+          <Bookmark
+            size={15}
+            variant={getProductFromWishlist(product.id) ? "Bold" : "Linear"}
+            color="#fff"
+          />
         </TouchableOpacity>
         <Image
           style={{
