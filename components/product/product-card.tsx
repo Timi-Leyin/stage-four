@@ -1,4 +1,5 @@
 import {
+  DimensionValue,
   Image,
   StyleSheet,
   Text,
@@ -28,7 +29,13 @@ import { useCart } from "@/context/cart-context";
 import { useRouter } from "expo-router";
 import ProductRating from "./product-rating";
 
-const ProductCard = ({ product }: { product: Products }) => {
+const ProductCard = ({
+  product,
+  width = "50%",
+}: {
+  product: Products;
+  width?: DimensionValue;
+}) => {
   const { cart, addToCart, removeFromCart, getProductFromCart } = useCart();
   const router = useRouter();
   const productInCart = getProductFromCart(product.id);
@@ -63,7 +70,7 @@ const ProductCard = ({ product }: { product: Products }) => {
   return (
     <View
       style={{
-        width: "50%",
+        width,
         justifyContent: "space-between",
       }}
     >
@@ -81,7 +88,7 @@ const ProductCard = ({ product }: { product: Products }) => {
           }}
           style={styles.addToWishlist}
         >
-          <Bookmark  size={15} color="#fff" />
+          <Bookmark size={15} color="#fff" />
         </TouchableOpacity>
         <Image
           style={{
@@ -160,11 +167,11 @@ const styles = StyleSheet.create({
   addToWishlist: {
     position: "absolute",
     top: 10,
-    padding:10,
+    padding: 10,
     right: 10,
     zIndex: 1,
-    backgroundColor:primaryColor,
-    borderRadius:30
+    backgroundColor: primaryColor,
+    borderRadius: 30,
   },
   price: {
     fontSize: 20,
