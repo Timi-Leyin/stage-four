@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View, useColorScheme } from "react-native";
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import { Bookmark, Heart, Notification, ShoppingCart, User } from "iconsax-react-native";
+import { Bookmark, Clock, Heart, Notification, ShoppingCart, User } from "iconsax-react-native";
 import { Colors } from "@/constants/colors";
 import { useRouter } from "expo-router";
 import { ThemedText } from "../themed/themed-text";
@@ -36,10 +36,10 @@ const TopBar = ({ title }: { title?: string }) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            // router.navigate("/notifications");
+            router.navigate("/orders");
           }}
         >
-          <Notification color={shadeColor} />
+          <Clock color={shadeColor} />
         </TouchableOpacity>
       </View>
     </View>

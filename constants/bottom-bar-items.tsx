@@ -28,7 +28,7 @@ export default [
   {
     name: "History",
     icon: HistoryIcon,
-    href: "/history",
+    href: "/orders",
     middle: false,
   },
   {
