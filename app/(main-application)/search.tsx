@@ -22,6 +22,7 @@ import Carousel from "react-native-reanimated-carousel";
 import { Image } from "react-native";
 import { Products } from "@/interfaces/products";
 import { SearchNormal } from "iconsax-react-native";
+import IsEmpty from "@/components/common/is-empty";
 const Search = () => {
   const { data: productsData, loading } = useProducts();
   const [searchQuery, setSearchQuery] = useState("");
@@ -112,9 +113,15 @@ const Search = () => {
         )}
 
         <View>
-          {products.map((pro) => {
-            return <ProductCard width={"100%"} product={pro} />;
-          })}
+          {!searchQuery || products.length == 0 ? (
+            <IsEmpty>No Product Found</IsEmpty>
+          ) : (
+            <View>
+              {products.map((pro) => {
+                return <ProductCard width={"100%"} product={pro} />;
+              })}
+            </View>
+          )}
         </View>
       </ScrollView>
       <View
