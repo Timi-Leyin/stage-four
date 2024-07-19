@@ -5,17 +5,15 @@ import { ProductsProvider } from "@/context/products-context";
 import BottomBar from "@/components/navigation/bottom-bar";
 import { CartProvider } from "@/context/cart-context";
 import { WishlistProvider } from "@/context/wishlist-context";
+import { OrderProvider } from "@/context/orders-context";
+import { Providers } from "@/context";
 
 const AppLayout = () => {
   return (
-    <ProductsProvider>
-      <CartProvider>
-        <WishlistProvider>
-          <Slot />
-        </WishlistProvider>
-        <BottomBar />
-      </CartProvider>
-    </ProductsProvider>
+    <Providers>
+      <Slot />
+      <BottomBar />
+    </Providers>
   );
 };
 

@@ -20,9 +20,14 @@ import {
   formatCVV,
   formatExpiryDate,
 } from "@/utils/format-card";
+import { useOrderContext } from "@/context/orders-context";
+import { useCart } from "@/context/cart-context";
 
 const Payment = () => {
   const router = useRouter();
+  const { cart } = useCart();
+  const products = cart.filter((ca) => ca.product);
+  const { addOrder } = useOrderContext();
   const [cardNumber, setCardNumber] = useState("");
   const [expireDate, setExpDate] = useState("");
   const [cvv, setCvv] = useState("");
@@ -153,6 +158,17 @@ const Payment = () => {
 
         <ThemedButton
           onPress={() => {
+            addOrder({
+              id: Math.random().toString(32).slice(2),
+              customer: {
+                address: "ad",
+                email: "ot@gmail.com",
+                name: "Original Timi",
+              },
+              items: cart,
+              createdAt:new Date(),
+              status: "completed",
+            });
             router.navigate("/payment-success");
           }}
         >
