@@ -31,6 +31,9 @@ A React Native application for shopping that allows users to browse products, ad
 
 ![Screen](./assets/screenshot/4.jpg)
 ![Screen](./assets/screenshot/5.jpg)
+![Screen](./assets/screenshot/6.jpg)
+![Screen](./assets/screenshot/7.jpg)
+<video src="./assets/screenshot/screen-record.mp4"></video>
 
 ## Installation
 

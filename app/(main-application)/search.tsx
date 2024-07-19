@@ -118,7 +118,7 @@ const Search = () => {
           ) : (
             <View>
               {products.map((pro) => {
-                return <ProductCard width={"100%"} product={pro} />;
+                return <ProductCard key={pro.id} width={"100%"} product={pro} />;
               })}
             </View>
           )}
